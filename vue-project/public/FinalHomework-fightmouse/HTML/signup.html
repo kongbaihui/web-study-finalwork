@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录/注册页面</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 400px;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-field {
+      margin-bottom: 15px;
+    }
+
+    .input-field label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #409eff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #307fe2;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .toggle a {
+      color: #409eff;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .toggle a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <video autoplay loop muted playsinline>
+    <source src="../images/65801-515379581_large.mp4" type="video/mp4" />
+  </video>
+  <div class="container">
+    <!-- 登录表单 -->
+    <div id="login-form">
+      <h2>登录</h2>
+      <div class="input-field">
+        <label for="login-email">邮箱</label>
+        <input type="email" id="login-email" placeholder="输入您的邮箱" required>
+      </div>
+      <div class="input-field">
+        <label for="login-password">密码</label>
+        <input type="password" id="login-password" placeholder="输入您的密码" required>
+      </div>
+      <div class="button-container">
+        <button onclick="login()">登录</button>
+      </div>
+      <div class="toggle">
+        <p>还没有账号？ <a onclick="toggleForm('register')">注册</a></p>
+      </div>
+    </div>
+
+    <!-- 注册表单 -->
+    <div id="register-form" class="hidden">
+      <h2>注册</h2>
+      <div class="input-field">
+        <label for="register-username">用户名</label>
+        <input type="text" id="register-username" placeholder="输入您的用户名" required>
+      </div>
+      <div class="input-field">
+        <label for="register-email">邮箱</label>
+        <input type="email" id="register-email" placeholder="输入您的邮箱" required>
+      </div>
+      <div class="input-field">
+        <label for="register-password">密码</label>
+        <input type="password" id="register-password" placeholder="输入您的密码" required>
+      </div>
+      <div class="input-field">
+        <label for="register-confirm-password">确认密码</label>
+        <input type="password" id="register-confirm-password" placeholder="确认您的密码" required>
+      </div>
+      <div class="button-container">
+        <button onclick="register()">注册</button>
+      </div>
+      <div class="toggle">
+        <p>已有账号？ <a onclick="toggleForm('login')">登录</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 切换表单（登录/注册）
+    function toggleForm(formType) {
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+
+      if (formType === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+      }
+    }
+
+    // 登录逻辑（模拟）
+    function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      if (email === "" || password === "") {
+        alert("请填写所有字段！");
+      } else {
+        alert("登录成功！");
+        // 此处可添加跳转逻辑或其他操作
+        window.location.href = '/vue-project/src/views/HomeView.vue';
+      }
+    }
+
+    // 注册逻辑（模拟）
+    function register() {
+      const username = document.getElementById('register-username').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+
+      if (username === "" || email === "" || password === "" || confirmPassword === "") {
+        alert("请填写所有字段！");
+      } else if (password !== confirmPassword) {
+        alert("密码不一致！");
+      } else {
+        alert("注册成功！");
+
+        // 此处可添加注册成功后的操作或跳转逻辑
+
+        toggleForm('login')
+      }
+    }
+  </script>
+</body>
+
+</html>
